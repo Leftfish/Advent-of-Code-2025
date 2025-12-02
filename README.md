@@ -14,4 +14,4 @@ For years I've been telling myself that I've had enough, that I no longer have t
 Things I **L**earned, **R**evised or **I**mproved at in 2025:
 
 * [Day 1 Python](01/d01.py): modulo arithmetic (**R**)
-* [Day 2 Python](02/d02.py): factorization (**R**), using log10 to count the number of digits (**R**)
+* [Day 2 Python](02/d02.py): using log10 to count the number of digits (**R**)

@@ -10,27 +10,30 @@ def parse_data(data):
     return ranges
 
 
-def factorize(n):
-    return [i for i in range(1, n+1) if n / i == n // i]
+def num_digits(n):
+    return int(log10(n) + 1)
 
-FACTOR_TABLE = {n: factorize(n) for n in range(20)}
+def get_divisors(n):
+    return [i for i in range(1, n+1) if not n % i]
+
+DIVISORS = {n: get_divisors(n) for n in range(20)}
 
 def find_multiples(rng):
     duplicates, multiples = set(), set()
     start, end = rng
-    to_check = list(range(int(log10(start))+1, int(log10(end))+1+1))
+    to_check = list(range(num_digits(start), num_digits(end)+1))
 
     for dig_number in to_check:
-        for factor in FACTOR_TABLE[dig_number]:
+        for factor in DIVISORS[dig_number]:
+            repeat = dig_number // factor
             if factor != dig_number:
                 for i in range(1, 10**factor):
                     base = 10 ** (int(log10(i)) + 1)
-                    repeat = dig_number // factor
-                    repeated = i * (base ** repeat - 1) // (base - 1)
-                    if start <= repeated <= end:
-                        multiples.add(repeated)
+                    candidate_id = i * (base ** repeat - 1) // (base - 1)
+                    if start <= candidate_id <= end:
+                        multiples.add(candidate_id)
                         if dig_number // factor == 2:
-                            duplicates.add(repeated)
+                            duplicates.add(candidate_id)
 
     return sum(duplicates), sum(multiples)
 
