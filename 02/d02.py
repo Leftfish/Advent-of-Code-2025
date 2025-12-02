@@ -13,6 +13,7 @@ def parse_data(data):
 def factorize(n):
     return [i for i in range(1, n+1) if n / i == n // i]
 
+FACTOR_TABLE = {n: factorize(n) for n in range(20)}
 
 def find_multiples(rng):
     duplicates, multiples = set(), set()
@@ -20,7 +21,7 @@ def find_multiples(rng):
     to_check = list(range(int(log10(start))+1, int(log10(end))+1+1))
 
     for dig_number in to_check:
-        for factor in factorize(dig_number):
+        for factor in FACTOR_TABLE[dig_number]:
             if factor != dig_number:
                 for i in range(1, 10**factor):
                     base = 10 ** (int(log10(i)) + 1)
@@ -36,7 +37,6 @@ def find_multiples(rng):
 
 DAY = 2
 TEST_DATA = '''11-22,95-115,998-1012,1188511880-1188511890,222220-222224,1698522-1698528,446443-446449,38593856-38593862,565653-565659,824824821-824824827,2121212118-2121212124'''
-
 
 print(f'Day {DAY} of Advent of Code!')
 print('Testing...')
