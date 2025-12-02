@@ -1,4 +1,5 @@
 import os
+from math import log10
 
 
 def parse_data(data):
@@ -10,25 +11,21 @@ def parse_data(data):
 
 
 def factorize(n):
-    factors = []
-    for i in range(1, n+1):
-        if n / i == n // i:
-            factors.append(i)
-    return factors
+    return [i for i in range(1, n+1) if n / i == n // i]
 
 
 def find_multiples(rng):
-    duplicates = set()
-    multiples = set()
+    duplicates, multiples = set(), set()
     start, end = rng
-    digs_start, digs_stop = int(len(str(start))), int(len(str(end)))
-    to_check = [digs_start] if digs_start == digs_stop else [digs_start, digs_stop]
+    to_check = list(range(int(log10(start))+1, int(log10(end))+1+1))
 
     for dig_number in to_check:
         for factor in factorize(dig_number):
             if factor != dig_number:
                 for i in range(1, 10**factor):
-                    repeated = int(str(i) * (dig_number // factor))
+                    base = 10 ** (int(log10(i)) + 1)
+                    repeat = dig_number // factor
+                    repeated = i * (base ** repeat - 1) // (base - 1)
                     if start <= repeated <= end:
                         multiples.add(repeated)
                         if dig_number // factor == 2:
