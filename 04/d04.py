@@ -1,6 +1,6 @@
 import os
 
-from collections import defaultdict, deque
+from collections import defaultdict
 
 PAPER = '@'
 EMPTY = '.'
@@ -34,38 +34,19 @@ def find_removable(grid):
     return {coord for coord in grid if grid[coord] == PAPER and accessible(find_adjacent(grid, coord))}
 
 
-def sum_paper(grid):
-    return sum(1 for fld in grid if grid[fld] == PAPER)
-
-
-def count_iteratively_removed(grid):
+def count_with_pseudo_to_checkueue(grid):
     s = 0
-    while True:
-        removable = find_removable(grid)
-        if not removable:
-            break
-        pre_remove = sum_paper(grid)
-        for coord in removable:
-            grid[coord] = EMPTY
-        s += abs(sum_paper(grid) - pre_remove)
-    return s
+    to_check = find_removable(grid)
 
-
-def count_with_pseudo_queue(grid):
-    s = 0
-    Q = set()
-    for roll in find_removable(grid):
-        Q.add(roll)
-
-    while len(Q) > 0:
-        current = Q.pop()
+    while to_check:
+        current = to_check.pop()
         neighbors = find_adjacent(grid, current)
         if accessible(neighbors) and grid[current] == PAPER:
             grid[current] = EMPTY
             s += 1
             for n in neighbors:
                 if grid[n] == PAPER:
-                    Q.add(n)
+                    to_check.add(n)
 
     return s
 
@@ -86,9 +67,8 @@ TEST_DATA = '''..@@.@@@@.
 print(f'Day {DAY} of Advent of Code!')
 print('Testing...')
 warehouse = parse_data(TEST_DATA)
-print('Initially removable:', sum(1 for fld in warehouse if warehouse[fld] == PAPER and len(find_adjacent(warehouse, fld)) < 4) == 13)
-#print('Iteratively removed:', count_iteratively_removed(warehouse) == 43)
-print('Iteratively removed (set as pseudo-queue):', count_with_pseudo_queue(warehouse) == 43)
+print('Initially removable:', len(find_removable(warehouse)) == 13)
+print('Iteratively removed (set as pseudo-to_checkueue):', count_with_pseudo_to_checkueue(warehouse) == 43)
 
 
 input_path = f"{os.getcwd()}\\{str(DAY).zfill(2)}\\inp"
@@ -96,6 +76,5 @@ with open(input_path, mode='r', encoding='utf-8') as inp:
     print('Solution...')
     data = inp.read()
     warehouse = parse_data(data)
-    print('Initially removable:', sum(1 for fld in warehouse if warehouse[fld] == PAPER and len(find_adjacent(warehouse, fld)) < 4))
-    #print('Iteratively removed:', count_iteratively_removed(warehouse))
-    print('Iteratively removed (set as pseudo-queue):', count_with_pseudo_queue(warehouse))
+    print('Initially removable:', len(find_removable(warehouse)))
+    print('Iteratively removed (set as pseudo-to_checkueue):', count_with_pseudo_to_checkueue(warehouse))
