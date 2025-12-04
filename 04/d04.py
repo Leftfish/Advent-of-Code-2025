@@ -51,21 +51,22 @@ def count_iteratively_removed(grid):
     return s
 
 
-def count_with_queue(grid):
+def count_with_pseudo_queue(grid):
     s = 0
-    Q = deque()
+    Q = set()
     for roll in find_removable(grid):
-        Q.append(roll)
+        Q.add(roll)
 
     while len(Q) > 0:
-        current = Q.popleft()
+        current = Q.pop()
         neighbors = find_adjacent(grid, current)
         if accessible(neighbors) and grid[current] == PAPER:
             grid[current] = EMPTY
             s += 1
             for n in neighbors:
                 if grid[n] == PAPER:
-                    Q.append(n)
+                    Q.add(n)
+
     return s
 
 
@@ -87,7 +88,7 @@ print('Testing...')
 warehouse = parse_data(TEST_DATA)
 print('Initially removable:', sum(1 for fld in warehouse if warehouse[fld] == PAPER and len(find_adjacent(warehouse, fld)) < 4) == 13)
 #print('Iteratively removed:', count_iteratively_removed(warehouse) == 43)
-print('Iteratively removed (queue):', count_with_queue(warehouse) == 43)
+print('Iteratively removed (set as pseudo-queue):', count_with_pseudo_queue(warehouse) == 43)
 
 
 input_path = f"{os.getcwd()}\\{str(DAY).zfill(2)}\\inp"
@@ -97,4 +98,4 @@ with open(input_path, mode='r', encoding='utf-8') as inp:
     warehouse = parse_data(data)
     print('Initially removable:', sum(1 for fld in warehouse if warehouse[fld] == PAPER and len(find_adjacent(warehouse, fld)) < 4))
     #print('Iteratively removed:', count_iteratively_removed(warehouse))
-    print('Iteratively removed (queue):', count_with_queue(warehouse))
+    print('Iteratively removed (set as pseudo-queue):', count_with_pseudo_queue(warehouse))
