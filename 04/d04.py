@@ -1,6 +1,6 @@
 import os
 
-from collections import defaultdict
+from collections import defaultdict, deque
 
 PAPER = '@'
 EMPTY = '.'
@@ -51,6 +51,24 @@ def count_iteratively_removed(grid):
     return s
 
 
+def count_with_queue(grid):
+    s = 0
+    Q = deque()
+    for roll in find_removable(grid):
+        Q.append(roll)
+
+    while len(Q) > 0:
+        current = Q.popleft()
+        neighbors = find_adjacent(grid, current)
+        if accessible(neighbors) and grid[current] == PAPER:
+            grid[current] = EMPTY
+            s += 1
+            for n in neighbors:
+                if grid[n] == PAPER:
+                    Q.append(n)
+    return s
+
+
 DAY = 4
 TEST_DATA = '''..@@.@@@@.
 @@@.@.@.@@
@@ -68,7 +86,8 @@ print(f'Day {DAY} of Advent of Code!')
 print('Testing...')
 warehouse = parse_data(TEST_DATA)
 print('Initially removable:', sum(1 for fld in warehouse if warehouse[fld] == PAPER and len(find_adjacent(warehouse, fld)) < 4) == 13)
-print('Iteratively removed:', count_iteratively_removed(warehouse) == 43)
+#print('Iteratively removed:', count_iteratively_removed(warehouse) == 43)
+print('Iteratively removed (queue):', count_with_queue(warehouse) == 43)
 
 
 input_path = f"{os.getcwd()}\\{str(DAY).zfill(2)}\\inp"
@@ -77,4 +96,5 @@ with open(input_path, mode='r', encoding='utf-8') as inp:
     data = inp.read()
     warehouse = parse_data(data)
     print('Initially removable:', sum(1 for fld in warehouse if warehouse[fld] == PAPER and len(find_adjacent(warehouse, fld)) < 4))
-    print('Iteratively removed:', count_iteratively_removed(warehouse))
+    #print('Iteratively removed:', count_iteratively_removed(warehouse))
+    print('Iteratively removed (queue):', count_with_queue(warehouse))
