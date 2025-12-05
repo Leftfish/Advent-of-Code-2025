@@ -17,3 +17,4 @@ Things I **L**earned, **R**evised or **I**mproved at in 2025:
 * [Day 2 Python](02/d02.py): using log10 to count the number of digits (**R**)
 * [Day 3 Python](03/d03.py): DFS (**R**), dynamic programming (**L**/**I**)
 * [Day 4 Python](04/d04.py): set operations (**R**), representing grids as dictionaries (**R**), queues (**R**)
+* [Day 5 Python](05/d05.py): flattening ranges of integers (**I**)
