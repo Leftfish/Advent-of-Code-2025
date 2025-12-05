@@ -13,17 +13,17 @@ def parse_data(data):
     return sorted(all_rngs, key=lambda r: r[0]), ingredients
 
 
-def flatten(all_rngs):
-    flattened = [all_rngs[0]]
+def merge(all_rngs):
+    merged = [all_rngs[0]]
     for r in all_rngs[1:]:
-        current = flattened[-1]
+        current = merged[-1]
         if r[0] <= current[1]:
             all_borders = current + r
             current[0] = min(all_borders)
             current[1] = max(all_borders)
         else:
-            flattened.append(r)
-    return flattened
+            merged.append(r)
+    return merged
 
 
 def check_ingredient(ingredient, all_rngs):
@@ -41,7 +41,7 @@ def count_fresh(ingredients, all_rngs):
 
 
 def sum_all_fresh(all_rngs):
-    return sum(r[1] - r[0] + 1 for r in flatten(all_rngs))
+    return sum(r[1] - r[0] + 1 for r in merge(all_rngs))
 
 
 DAY = 5
