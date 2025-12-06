@@ -1,6 +1,7 @@
 import os
 from functools import reduce
 from operator import mul, add
+from math import prod
 
 
 def parse_data(data):
@@ -46,6 +47,25 @@ def count_cephalophod_numbers(data, ranges):
     return s
 
 
+def count_cephalophod_numbers_alt(data):
+    numbers_and_ops = list(zip(*[line + ' ' for line in data]))
+    reduction = None
+    s = 0
+    nums = []
+    for group in numbers_and_ops:
+        if group[-1] == '*':
+            reduction = prod
+        elif group[-1] == '+':
+            reduction = sum
+        cur = ''.join(group[:-1])
+        if not cur.isspace():
+            nums.append(int(cur))
+        else:
+            s += reduction(nums)
+            nums = []
+    return s + reduction(nums)
+
+
 DAY = 6
 TEST_DATA = '''123 328  51 64 
  45 64  387 23 
@@ -57,6 +77,8 @@ print(f'Day {DAY} of Advent of Code!')
 print('Testing...')
 print('Calculating the normal way:', sum(calculate_column_normal(col) for col in parse_data(TEST_DATA)) == 4277556)
 print('Calculating the cephalophod way:', count_cephalophod_numbers(TEST_DATA, get_ranges(TEST_DATA[-1])) == 3263827)
+print('Calculating the cephalophod way but with zip:', count_cephalophod_numbers_alt(TEST_DATA) == 3263827)
+
 
 input_path = f"{os.getcwd()}\\{str(DAY).zfill(2)}\\inp"
 with open(input_path, mode='r', encoding='utf-8') as inp:
@@ -64,3 +86,4 @@ with open(input_path, mode='r', encoding='utf-8') as inp:
     data = inp.readlines()
     print('Calculating the normal way:', sum(calculate_column_normal(col) for col in parse_data(data)))
     print('Calculating the cephalophod way:', count_cephalophod_numbers(data, get_ranges(data[-1])))
+    print('Calculating the cephalophod way but with zip:', count_cephalophod_numbers_alt(data))
