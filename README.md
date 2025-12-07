@@ -19,3 +19,4 @@ Things I **L**earned, **R**evised or **I**mproved at in 2025:
 * [Day 4 Python](04/d04.py): set operations (**R**), representing grids as dictionaries (**R**), queues (**R**)
 * [Day 5 Python](05/d05.py): flattening ranges of integers (**I**)
 * [Day 6 Python](06/d06.py): reduce (**R**) and zip(**I**) in an alternative solution to part 2
+* [Day 7 Python](07/d07.py): DFS (**R**), Pascal's triangle (**R**) and that you don't need to generate everything that you need to count because you may run ouf of memory (**R**)
