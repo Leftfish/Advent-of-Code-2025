@@ -81,6 +81,19 @@ def get_all_paths_horrible(grid, start):
     return paths
 
 
+def count_paths_memoize(grid, pos, cache={}):
+    if pos not in grid:
+        return 1
+    if pos in cache:
+        return cache[pos]
+    if not is_next_splitter(pos, grid):
+        result = count_paths_memoize(grid,(pos[0] + 1, pos[1]))
+    else:
+        result = count_paths_memoize(grid,(pos[0], pos[1] + 1)) + count_paths_memoize(grid,(pos[0], pos[1] - 1))
+    cache[pos] = result
+    return result
+
+
 def count_all_paths(data):
     parsed = [list(line) for line in data.splitlines()]
     tape = [0 for _ in range(len(parsed[0]))]
@@ -127,12 +140,14 @@ TEST_DATA = '''.......S.......
 print(f'Day {DAY} of Advent of Code!')
 print('Testing...')
 print('Total splits in one pass:', dfs_split(*parse_data(TEST_DATA)) == 21)
-print('Total timelines (inefficient DFS-approach):', len(get_all_paths_horrible(*parse_data(TEST_DATA))) == 40)
-print('Total timelines (Pascal-triangle-like approach):', count_all_paths(TEST_DATA) == 40)
+print('Total timelines (inefficient iterative DFS):', len(get_all_paths_horrible(*parse_data(TEST_DATA))) == 40)
+print('Total timelines (recursive memoized DFS):', count_paths_memoize(*parse_data(TEST_DATA)) == 40)
+print('Total timelines (Pascal-triangle-like):', count_all_paths(TEST_DATA) == 40)
 
 input_path = f"{os.getcwd()}\\{str(DAY).zfill(2)}\\inp"
 with open(input_path, mode='r', encoding='utf-8') as inp:
     print('Solution...')
     data = inp.read()
     print('Total splits in one pass:', dfs_split(*parse_data(data)))
+    print('Total timelines (recursive memoized DFS):', count_paths_memoize(*parse_data(data)))
     print('Total timelines (Pascal-triangle-like approach):', count_all_paths(data))
