@@ -9,7 +9,7 @@ For the eight time I'm going to try to find out how far I can make it in [Advent
 * [2023](https://github.com/Leftfish/Advent-of-Code-2023): 25 days for the fourth time!
 * [2024](https://github.com/Leftfish/Advent-of-Code-2024): 25 days for the fifth time!
 
-For years I've been telling myself that I've had enough, that I no longer have time, that I have other stuff to do. So far, AoC won with everything, although ususally I had a couple of stars left to collect at the end of the regular AoC schedule. We'll see how it goes this time. It's going to be only 12 days, so I anticipate the difficulty to rise far quicker. As of day 3, I had the first big challenge (the second part required dynamic programming, which is one of my weaker skills).
+For years I've been telling myself that I've had enough, that I no longer have time, that I have other stuff to do. So far, AoC won with everything, although ususally I had a couple of stars left to collect at the end of the regular AoC schedule. We'll see how it goes this time. It's going to be only 12 days, so I anticipate the difficulty to rise far quicker. Day 3 part 2 was a big challenge (I used dynamic programming which is one of my weaker skills). Day 8 required some researching of stuff that I'd had only a vague idea about.
 
 Things I **L**earned, **R**evised or **I**mproved at in 2025:
 
@@ -20,3 +20,4 @@ Things I **L**earned, **R**evised or **I**mproved at in 2025:
 * [Day 5 Python](05/d05.py): flattening ranges of integers (**I**)
 * [Day 6 Python](06/d06.py): reduce (**R**) and zip(**I**) in an alternative solution to part 2
 * [Day 7 Python](07/d07.py): DFS (**R**), memoization (**I**), Pascal's triangle (**R**) and that you don't need to generate everything that you need to count because you may run ouf of memory (**R**)
+* [Day 8 Python](08/d08.py): minimum spanning trees (**L**) and Kruskal's algorithm (**L**)
