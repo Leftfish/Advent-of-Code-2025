@@ -18,16 +18,16 @@ For years I've been telling myself that I've had enough, that I no longer have t
 6) AI may be used more freely to improve the solution after getting a star.
 7) AI-generated code must be re-written to understand what each line does.
 
-Day 3 part 2 was a big challenge (I used dynamic programming which is one of my weaker skills). Day 8 required some researching of stuff that I'd had only a vague idea about, but I was mostly on the right trail even before using external sources. Day 9 part 2 was tough to solve without an external library. 
+Day 3 part 2 was a big challenge (I used dynamic programming which is one of my weaker skills). Day 8 required some researching of stuff that I'd had only a vague idea about, but I was mostly on the right trail even before using external sources. Day 9 part 2 was tough to solve without an external library.
 
-Things I **L**earned, **R**evised or **I**mproved at in 2025:
+Things I **L**earned, **R**evised or **I**mproved at in 2025, as well as AI usage log (**H** when it helped get at least one star, **U** when I used it to upgrade the solution after getting the stars without AI, **N** when no AI tools were used):
 
-* [Day 1 Python](01/d01.py): modulo arithmetic (**R**)
-* [Day 2 Python](02/d02.py): using log10 to count the number of digits (**R**)
-* [Day 3 Python](03/d03.py): DFS (**R**), dynamic programming (**L**/**I**)
-* [Day 4 Python](04/d04.py): set operations (**R**), representing grids as dictionaries (**R**), queues (**R**)
-* [Day 5 Python](05/d05.py): flattening ranges of integers (**I**)
-* [Day 6 Python](06/d06.py): reduce (**R**) and zip(**I**) in an alternative solution to part 2
-* [Day 7 Python](07/d07.py): DFS (**R**), memoization (**I**), Pascal's triangle (**R**) and that you don't need to generate everything that you need to count because you may run ouf of memory (**R**)
-* [Day 8 Python](08/d08.py): minimum spanning trees (**L**) and Kruskal's algorithm (**L**)
-* [Day 9 Python](09/d09.py): itertools.combinations (**R**) and shapely (**L**) because my original solution did not work for concave polygons (the final does it without external libraries, using ray casting (**L**))
+* [Day 1 Python](01/d01.py) **N** : modulo arithmetic (**R**)
+* [Day 2 Python](02/d02.py) **U** : using log10 to count the number of digits (**R**)
+* [Day 3 Python](03/d03.py) **H** : DFS (**R**), dynamic programming (**L**/**I**)
+* [Day 4 Python](04/d04.py) **N** : set operations (**R**), representing grids as dictionaries (**R**), queues (**R**)
+* [Day 5 Python](05/d05.py) **N** : flattening ranges of integers (**I**)
+* [Day 6 Python](06/d06.py) **N** : reduce (**R**) and zip(**I**) in an alternative solution to part 2
+* [Day 7 Python](07/d07.py) **U** : DFS (**R**), memoization (**I**), Pascal's triangle (**R**) and that you don't need to generate everything that you need to count because you may run ouf of memory (**R**)
+* [Day 8 Python](08/d08.py) **U** : minimum spanning trees (**L**) and Kruskal's algorithm (**L**)
+* [Day 9 Python](09/d09.py) **U** : itertools.combinations (**R**) and shapely (**L**) because my original solution did not work for concave polygons (the final does it without external libraries, using ray casting (**L**))
