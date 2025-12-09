@@ -80,40 +80,61 @@ pairs = list(combinations(reds, 2))
 rectangles = [get_corners(p) for p in pairs]
 
 ### DOES NOT WORK FOR CONCAVES!!!
+def part2_wrong():
+    m = 0
+    for r in rectangles:
+        if rectangle_in_convex(r, row_to_border) and area(r) > m:
+            m = area(r)
+
+    print(m)
+
+part2_wrong()
+
+from shapely.geometry import Polygon, box
+import matplotlib.pyplot as plt
+
+
+
+def plot_geom(ax, geom, face_alpha=0.2, label=None):
+    # Polygon (with possible holes)
+    if geom.geom_type == "Polygon":
+        x, y = geom.exterior.xy
+        ax.fill(x, y, alpha=face_alpha, label=label)
+        ax.plot(x, y)
+
+        for hole in geom.interiors:
+            hx, hy = hole.xy
+            ax.fill(hx, hy, color="white")   # punch the hole visually
+            ax.plot(hx, hy)
+    # MultiPolygon etc.
+    else:
+        for g in geom.geoms:
+            plot_geom(ax, g, face_alpha=face_alpha, label=label)
+
+poly = Polygon(reds)
+rrs = []
+for r in rectangles:
+    xs = [p[0] for p in r]
+    ys = [p[1] for p in r]
+    xmin, xmax = min(xs), max(xs)
+    ymin, ymax = min(ys), max(ys)
+    rr = box(xmin, ymin, xmax, ymax)
+    if poly.covers(rr):
+        rrs.append(rr)
 
 m = 0
-for r in rectangles:
-    if rectangle_in_convex(r, row_to_border) and area(r) > m:
-        m = area(r)
+s = None
+for rr in rrs:
+    if rr.area > m:
+        s = rr
+        m = rr.area
 
-print(m)
+xmin, ymin, xmax, ymax = s.bounds
+opposite1 = (xmin, ymin)
+opposite2 = (xmax, ymax)
 
-'''
-1. lista punktów jest już wystarczająco posortowana! wystarczy patrzeć do następnego, a na koniec połączyć ostatni z pierwszym
-- jeśli ten sam x, to y-i pomiędzy do zielonych, jak ten sam y, to x-y pomiędzy do zielonych
-2. posortować aktualne zielone i czerwone według y-a (to są wszystkie punkty w figurze)
-3. iterować przez nie i dla każdego y-a dodać do zielonych wszystkie punkty pomiędzy min-x a max-x
-4. jeszcze raz przez pary czerwonych ale:
-    - zrobić zbiór wszystkich punktów w prostokącie
-    - sprawdzić czy zbiór zawiera się w zbiorze "figura": if tak, dodać pole
-    - ale to będzie strasznie niewydajne!!!!! MemoryError
-    - może iterować od najwyższego pola i odrzucać po kolei?
-    - czyli:
-        - set coloured (red i green)
-        - wygeneruj wszystkie pary, posortuj od najwyższego pola
-        - skanuj każdy prostokąt linia po linii i jeśli zbiór linia nie zawiera się cały w zbiorze coloured to odrzuć prostokąt
-        - wtedy skanujesz w najgorszym razie 100 000 razy (tyle linii) per prostokąt, ale czy za każdym razem budując zbiór 100 000 elementów???
-        - czy da się inaczej sprawdzić? da się! trzeba sprawdzić, czy w danym wierszu najbardziej lewy koord prostokątu jest na lewo od najbardziej lewego
-          koorda w figurze
-        - więc nie trzeba budować zbioru
-    - worst case scenario to nadal 122 000 * 100 000 linii czyli 12 mld iteracji :(((( ale w praktyce to musi być mniej
-    
-    
-    - A MOŻE DLA KAŻDEGO PO PROSTU SPRAWDZAĆ 4 ROGI!!!
-    - ZBUDUJ PARĘ, DOBUDUJ ROGI, SPRAWDŹ CZY CZTERY ROGI SĄ W ŚRODKU I VOILA!!!!!!
-    - nadal potrzebny zbiór zielonych i czerwonych!
+print(area((opposite1,opposite2)))
 
-'''
 
 
 print(f'Day {DAY} of Advent of Code!')
@@ -132,14 +153,43 @@ print('Biggest rectangle:', get_biggest_rectangle(combinations(reds, 2)))
 edges = list(zip(reds, reds[1:])) + [(reds[-1], reds[0])]
 convex, row_to_border = get_convex(reds, edges)
 pairs = list(combinations(reds, 2))
+
 rectangles = [get_corners(p) for p in pairs]
 
 
-m = 0
+reds = parse_data(data)
+poly = Polygon(reds)
+rrs = []
 for r in rectangles:
-    if rectangle_in_convex(r, row_to_border) and area(r) > m:
-        m = area(r)
-    else:
-        print(f'{r} not in convex')
+    xs = [p[0] for p in r]
+    ys = [p[1] for p in r]
+    xmin, xmax = min(xs), max(xs)
+    ymin, ymax = min(ys), max(ys)
+    rr = box(xmin, ymin, xmax, ymax)
+    if poly.covers(rr):
+        rrs.append(rr)
 
-print(m)
+m = 0
+s = None
+for rr in rrs:
+    if rr.area > m:
+        s = rr
+        m = rr.area
+
+xmin, ymin, xmax, ymax = s.bounds
+opposite1 = (xmin, ymin)
+opposite2 = (xmax, ymax)
+
+print(area((opposite1,opposite2)))
+
+
+fig, ax = plt.subplots()
+
+
+plot_geom(ax, poly, face_alpha=0.15, label="polygon")
+plot_geom(ax, s, face_alpha=0.35, label=f"res")
+
+ax.set_aspect("equal", adjustable="box")
+ax.legend()
+ax.grid(True, alpha=0.3)
+plt.show()
