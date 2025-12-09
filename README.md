@@ -9,7 +9,16 @@ For the eight time I'm going to try to find out how far I can make it in [Advent
 * [2023](https://github.com/Leftfish/Advent-of-Code-2023): 25 days for the fourth time!
 * [2024](https://github.com/Leftfish/Advent-of-Code-2024): 25 days for the fifth time!
 
-For years I've been telling myself that I've had enough, that I no longer have time, that I have other stuff to do. So far, AoC won with everything, although ususally I had a couple of stars left to collect at the end of the regular AoC schedule. We'll see how it goes this time. It's going to be only 12 days, so I anticipate the difficulty to rise far quicker. Day 3 part 2 was a big challenge (I used dynamic programming which is one of my weaker skills). Day 8 required some researching of stuff that I'd had only a vague idea about.
+For years I've been telling myself that I've had enough, that I no longer have time, that I have other stuff to do. So far, AoC won with everything, although ususally I had a couple of stars left to collect at the end of the regular AoC schedule. We'll see how it goes this time. It's going to be only 12 days, so I anticipate the difficulty to rise far quicker. Self-imposed rules for LLM usage:
+1) The use of AI is limited but not excluded.
+2) AI inline autocomplete is DISABLED.
+3) AI may be used as a rubber duck or turbocharged Stack Overflow/wikipedia.
+4) AI may not be used to solve the entire task.
+5) AI may not be used before honest attempts to solve the task without external information (i.e., before running into a brick wall).
+6) AI may be used more freely to improve the solution after getting a star.
+7) AI-generated code must be re-written to understand what each line does.
+
+Day 3 part 2 was a big challenge (I used dynamic programming which is one of my weaker skills). Day 8 required some researching of stuff that I'd had only a vague idea about, but I was mostly on the right trail even before using external sources. Day 9 part 2 was tough to solve without an external library. 
 
 Things I **L**earned, **R**evised or **I**mproved at in 2025:
 
