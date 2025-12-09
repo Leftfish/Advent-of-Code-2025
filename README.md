@@ -21,3 +21,4 @@ Things I **L**earned, **R**evised or **I**mproved at in 2025:
 * [Day 6 Python](06/d06.py): reduce (**R**) and zip(**I**) in an alternative solution to part 2
 * [Day 7 Python](07/d07.py): DFS (**R**), memoization (**I**), Pascal's triangle (**R**) and that you don't need to generate everything that you need to count because you may run ouf of memory (**R**)
 * [Day 8 Python](08/d08.py): minimum spanning trees (**L**) and Kruskal's algorithm (**L**)
+* [Day 9 Python](09/d09.py): itertools.combinations (**R**) and shapely (**L**) because my original solution did not work for concave polygons
