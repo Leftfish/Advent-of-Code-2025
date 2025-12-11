@@ -41,7 +41,7 @@ def dfs(g, current, stop, cache):
     #print(f'Updating cache for {current} to {s}')
     cache[current] = s
     #print(f'At {current} returning {cache[current]} from cache, cache is {cache}')
-    return cache[current]
+    return s
 
 
 DAY = 11
@@ -78,7 +78,8 @@ g2 = parse_data(TEST_DATA_2)
 
 print(dfs(g2, 'svr', 'out', {}))
 
-print('From us to out:', bfs(g, 'you', 'out') == 5)
+print('From us to out (BFS):', bfs(g, 'you', 'out') == 5)
+print('From us to out (DFS):', dfs(g, 'you', 'out', {}) == 5)
 print('Server connections:', prod([dfs(g2, 'svr', 'fft', {}),
                                    dfs(g2, 'fft', 'dac', {}),
                                    dfs(g2, 'dac', 'out', {})]) +
@@ -94,7 +95,8 @@ with open(input_path, mode='r', encoding='utf-8') as inp:
     g = parse_data(data)
     g2 = parse_data(data)
 
-    print('From us to out:', bfs(g, 'you', 'out'))
+    print('From us to out (BFS):', bfs(g, 'you', 'out'))
+    print('From us to out (DFS):', dfs(g, 'you', 'out', {}))
     print('Server connections:', prod([dfs(g2, 'svr', 'fft', {}),
                                        dfs(g2, 'fft', 'dac', {}),
                                        dfs(g2, 'dac', 'out', {})]) +
