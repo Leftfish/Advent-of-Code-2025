@@ -32,3 +32,4 @@ Things I **L**earned, **R**evised or **I**mproved at in 2025, as well as AI usag
 * [Day 8 Python](08/d08.py) **U** (LLM used to debug the upgrade that did not rely on external libraries): minimum spanning trees (**L**) and Kruskal's algorithm (**L**)
 * [Day 9 Python](09/d09.py) **U** (LLM used to debug the upgrade that did not rely on external libraries): itertools.combinations (**R**) and shapely (**L**) because my original solution did not work for concave polygons (the final does it without external libraries, using ray casting (**L**))
 * [Day 10 Python](10/d10.py) **H** (LLM shamefully used to get out of the rabbit hole of trying to use DFS): BFS (**R**) because my original approach for part 1 did not make sense, linear programming (**L**) and first steps with scipy (**L**) for part 2 which was WAY above my weight category
+* [Day 11 Python](11/d11.py) **N** : iterative BFS (**R**) and recursive DFS with memoization (**I**)
